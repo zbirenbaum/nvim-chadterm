@@ -26,7 +26,7 @@ end
 
 local config_handler = function (config)
    keymaps_handler(config["keymaps"])
-   behaviour_handler(config["behavior"])
+   behavior_handler(config["behavior"])
 end
 
 M.setup = function (user_config)
