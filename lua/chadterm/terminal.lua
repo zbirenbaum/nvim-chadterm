@@ -5,24 +5,11 @@ vim.cmd [[ au TermOpen term://* setlocal nonumber norelativenumber | setfiletype
 ChadTerms = {horizontal = {}, vertical = {}}
 
 
-local splits = {
-  horizontal = {
-    existing = "rightbelow vsplit",
-    new = "botright split",
-    resize = "resize",
-  },
-  vertical = {
-    existing = "rightbelow split",
-    new = "botright vsplit",
-    resize = "vertical resize",
-  },
-}
-
 local function new_term(direction, exists)
    if not exists then
-      vim.cmd(splits[direction]["new"])
+      vim.cmd(require("chadterm").get_cmds()[direction]["new"])
    else
-      vim.cmd(splits[direction]["existing"])
+      vim.cmd(require("chadterm").get_cmds()[direction]["existing"])
    end
    local wins = vim.api.nvim_list_wins()
    local term_id = wins[#wins]
@@ -69,6 +56,4 @@ function M.new_or_toggle (direction)
    end
 end
 
-
 return M
-
