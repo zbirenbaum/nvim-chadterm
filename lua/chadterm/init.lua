@@ -1,4 +1,5 @@
 local M = {}
+print("debug")
 
 local set_keymaps = function (direction, hotkey)
    vim.keymap.set("n", hotkey,
