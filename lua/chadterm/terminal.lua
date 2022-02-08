@@ -55,7 +55,7 @@ local function show_term(direction)
       vim.api.nvim_set_current_win(term_id)
       vim.api.nvim_input('i')
    else
-      require("custom.terminal").new_term(direction)
+      new_term(direction)
    end
 end
 
