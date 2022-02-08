@@ -20,7 +20,7 @@ end
 
 local behavior_handler = function (behavior)
    if behavior.close_on_exit then
-      vim.cmd("au TermClose * feedkeys('<CR>')")
+      vim.cmd("au TermClose * lua vim.api.nvim_input('<CR>')")
    end
 end
 
