@@ -31,7 +31,7 @@ M.setup = function (user_config)
          float = "<A-i>",
       },
    }
-   if user_config ~= nil then
+   if user_config ~= nil and not vim.tbl_isempty(user_config) then
       config = vim.tbl_deep_extend(config, user_config)
    end
    set_config_keymaps(config.keymaps)
