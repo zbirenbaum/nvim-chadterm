@@ -6,10 +6,12 @@ ChadTerms = {horizontal = {}, vertical = {}}
 
 
 local function new_term(direction, exists)
+   local cmds = require("chadterm").get_cmds()
+   print(vim.inspect(cmds))
    if not exists then
-      vim.cmd(require("chadterm").get_cmds()[direction]["new"])
+      vim.cmd(cmds[direction]["new"])
    else
-      vim.cmd(require("chadterm").get_cmds()[direction]["existing"])
+      vim.cmd(cmds[direction]["existing"])
    end
    local wins = vim.api.nvim_list_wins()
    local term_id = wins[#wins]
