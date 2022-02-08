@@ -22,8 +22,6 @@ local set_config_keymaps = function (keymaps)
 end
 
 M.setup = function (user_config)
-   print("debug")
-   print(user_config)
    local config = {
       keymaps = {
          horizontal = "<leader>x",
@@ -34,7 +32,6 @@ M.setup = function (user_config)
    if user_config ~= nil and not vim.tbl_isempty(user_config) then
       config = vim.tbl_deep_extend(config, user_config)
    end
-   print(vim.inspect(config["keymaps"]))
    set_config_keymaps(config["keymaps"])
 end
 

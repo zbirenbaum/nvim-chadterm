@@ -18,7 +18,7 @@ local splits = {
   },
 }
 
-function M.new_term(direction, exists)
+local function new_term(direction, exists)
    if not exists then
       vim.cmd(splits[direction]["new"])
    else
@@ -32,7 +32,7 @@ function M.new_term(direction, exists)
    vim.api.nvim_input('i')
 end
 
-function M.hide_term(direction)
+local function hide_term(direction)
    local term_id = ChadTerms[direction][1]
    if term_id then
       vim.api.nvim_set_current_win(term_id)
@@ -40,7 +40,7 @@ function M.hide_term(direction)
    end
 end
 
-function M.show_term(direction)
+local function show_term(direction)
    local term_id = nil
    local prev_wins = vim.api.nvim_list_wins()
    vim.cmd('unhide')
@@ -61,11 +61,11 @@ end
 
 function M.new_or_toggle (direction)
    if (vim.tbl_isempty(ChadTerms[direction]) or not ChadTerms[direction][1]) then
-      require("custom.terminal").new_term(direction)
+      new_term(direction)
    elseif not vim.tbl_contains(vim.api.nvim_list_wins(), ChadTerms[direction][1]) then
-      require("custom.terminal").show_term(direction)
+      show_term(direction)
    else
-      require("custom.terminal").hide_term(direction)
+      hide_term(direction)
    end
 end
 
