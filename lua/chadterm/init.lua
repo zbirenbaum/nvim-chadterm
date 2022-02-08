@@ -34,7 +34,8 @@ M.setup = function (user_config)
    if user_config ~= nil and not vim.tbl_isempty(user_config) then
       config = vim.tbl_deep_extend(config, user_config)
    end
-   set_config_keymaps(config.keymaps)
+   print(vim.inspect(config["keymaps"]))
+   set_config_keymaps(config["keymaps"])
 end
 
 return M
