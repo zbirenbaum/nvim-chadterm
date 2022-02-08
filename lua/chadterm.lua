@@ -18,7 +18,7 @@ local keymaps_handler = function (keymaps)
    end
 end
 
-local behaviour_handler = function (behavior)
+local behavior_handler = function (behavior)
    if behavior.close_on_exit then
       vim.cmd("au TermClose * feedkeys('<CR>')")
    end
@@ -26,7 +26,7 @@ end
 
 local config_handler = function (config)
    keymaps_handler(config["keymaps"])
-   behaviour_handler(config["behaviour"])
+   behaviour_handler(config["behavior"])
 end
 
 M.setup = function (user_config)
