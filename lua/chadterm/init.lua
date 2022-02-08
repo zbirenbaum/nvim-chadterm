@@ -1,5 +1,4 @@
 local M = {}
-print("debug")
 
 local set_keymaps = function (direction, hotkey)
    vim.keymap.set("n", hotkey,
@@ -23,6 +22,8 @@ local set_config_keymaps = function (keymaps)
 end
 
 M.setup = function (user_config)
+   print("debug")
+   print(user_config)
    local config = {
       keymaps = {
          horizontal = "<leader>x",
