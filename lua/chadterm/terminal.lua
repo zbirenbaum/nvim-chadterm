@@ -28,13 +28,13 @@ function M.new_or_toggle (direction, dims)
    local function new_term()
       vim.cmd(cmds[direction]["new"])
       local wins = vim.api.nvim_list_wins()
-      local bufs = vim.api.nvim_list_bufs()
       local term_win_id = wins[#wins]
-      local term_buf_id = bufs[#bufs]
-      chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
       vim.api.nvim_set_current_win(term_win_id)
       vim.cmd("term")
       vim.api.nvim_input('i')
+      local bufs = vim.api.nvim_list_bufs()
+      local term_buf_id = bufs[#bufs]
+      chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
    end
 
    local function hide_term()
