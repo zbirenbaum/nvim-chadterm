@@ -12,7 +12,7 @@ end
 M.setup = function (user_config)
    local config = {
       keymaps = {
-         horizontal = "<leader>x",
+         horizontal = "<leader>h",
          vertical = "<leader>v",
          float = "<A-i>",
       },
