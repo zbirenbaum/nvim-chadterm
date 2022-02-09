@@ -48,6 +48,7 @@ function M.new_or_toggle (direction, dims)
    local function show_term()
       local term_buf_id = chadterms[direction][1]["buf"]
       if vim.api.nvim_buf_is_valid(term_buf_id) then
+         print(term_buf_id)
          vim.cmd("unhide " .. term_buf_id)
       --    vim.cmd(cmds[direction]["new"])
       --    local wins = vim.api.nvim_list_wins()
