@@ -46,6 +46,7 @@ function M.new_or_toggle (direction, dims)
    end
 
    local function show_term()
+      print("show")
       local term_buf_id = chadterms[direction][1]["buf"]
       if vim.api.nvim_buf_is_valid(term_buf_id) then
          print(term_buf_id)
