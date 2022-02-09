@@ -11,7 +11,7 @@ M.setup = function (user_config)
          close_on_exit = true,
       },
       window = {
-         vsplit_width = .3,
+         vsplit_width = .5,
          split_height = .3,
       },
    }
