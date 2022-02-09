@@ -23,6 +23,7 @@ end
 local chadterms = Globals.chadterms
 
 function M.new_or_toggle (direction, dims)
+   print(direction)
    local function new_term(exists)
       local cmds = get_cmds(dims)
       print(vim.inspect(cmds))
