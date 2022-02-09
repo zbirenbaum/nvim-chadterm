@@ -16,7 +16,7 @@ end
 
 local M = {}
 
-local chadterms = require("chadterm.globals").chadterm
+local chadterms = Globals.chadterm
 
 function M.new_or_toggle (direction, dims)
    local function new_term(exists)
