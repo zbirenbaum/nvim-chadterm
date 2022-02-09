@@ -22,6 +22,7 @@ end
 
 function M.new_or_toggle (direction, dims)
    local chadterms = Globals.chadterms
+   print(vim.inspect(dims))
    local cmds = get_cmds(dims)
    local wins = vim.api.nvim_list_wins()
    local bufs = vim.api.nvim_list_bufs()
