@@ -24,11 +24,11 @@ function M.new_or_toggle (direction, dims)
    local chadterms = Globals.chadterms
    print(vim.inspect(dims))
    local cmds = get_cmds(dims)
-   local wins = vim.api.nvim_list_wins()
-   local bufs = vim.api.nvim_list_bufs()
 
    local function new_term()
       vim.cmd(cmds[direction]["new"])
+      local wins = vim.api.nvim_list_wins()
+      local bufs = vim.api.nvim_list_bufs()
       local term_win_id = wins[#wins]
       local term_buf_id = bufs[#bufs]
       chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
@@ -49,6 +49,7 @@ function M.new_or_toggle (direction, dims)
       local term_buf = chadterms[direction][1]["buf"]
       if vim.api.nvim_buf_is_valid(term_buf) then
          vim.cmd(cmds[direction]["new"])
+         local wins = vim.api.nvim_list_wins()
          vim.api.nvim_set_current_win(wins[#wins])
          vim.api.nvim_win_set_buf(term_buf)
          chadterms[direction][1]["win"] = wins[#wins]
@@ -57,12 +58,16 @@ function M.new_or_toggle (direction, dims)
       end
    end
 
-   if vim.tbl_isempty(chadterms[direction]) then
+   local opened = chadterms[direction]
+   if not opened or vim.tbl_isempty(opened) then
       new_term()
-   elseif not vim.tbl_contains(vim.api.nvim_list_wins(), chadterms[direction][1]["win"]) then
+   elseif not vim.api.nvim_win_is_valid(chadterms[direction][1]["win"]) then
+      hide_term()
+   elseif vim.api.nvim_buf_is_valid(chadterms[direction][1]["buf"]) then
       show_term()
    else
-      hide_term()
+      print("new")
+      new_term()
    end
    on_action(chadterms)
 end
