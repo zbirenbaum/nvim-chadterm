@@ -23,15 +23,9 @@ end
 local chadterms = Globals.chadterms
 
 function M.new_or_toggle (direction, dims)
-   print(direction)
-   local function new_term(exists)
+   local function new_term()
       local cmds = get_cmds(dims)
-      print(vim.inspect(cmds))
-      if not exists then
-         vim.cmd(cmds[direction]["new"])
-      else
-         vim.cmd(cmds[direction]["existing"])
-      end
+      vim.cmd(cmds[direction]["new"])
       local wins = vim.api.nvim_list_wins()
       local term_id = wins[#wins]
       chadterms[direction][1] = term_id
@@ -65,7 +59,8 @@ function M.new_or_toggle (direction, dims)
          new_term(direction)
       end
    end
-   if (vim.tbl_isempty(chadterms[direction]) or not chadterms[direction][1]) then
+
+   if vim.tbl_isempty(chadterms[direction]) then
       new_term()
    elseif not vim.tbl_contains(vim.api.nvim_list_wins(), chadterms[direction][1]) then
       show_term()
