@@ -34,6 +34,7 @@ function M.new_or_toggle (direction, dims)
       chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
       vim.api.nvim_set_current_win(term_win_id)
       vim.cmd("term")
+      vim.api.nvim_buf_set_option(0, {})
       vim.api.nvim_input('i')
    end
 
@@ -41,18 +42,18 @@ function M.new_or_toggle (direction, dims)
       local term_id = chadterms[direction][1]["win"]
       if term_id then
          vim.api.nvim_set_current_win(term_id)
-         vim.cmd('hide')
       end
    end
 
    local function show_term()
-      local term_buf = chadterms[direction][1]["buf"]
-      if vim.api.nvim_buf_is_valid(term_buf) then
-         vim.cmd(cmds[direction]["new"])
-         local wins = vim.api.nvim_list_wins()
-         vim.api.nvim_set_current_win(wins[#wins])
-         vim.api.nvim_win_set_buf(0, term_buf)
-         chadterms[direction][1]["win"] = wins[#wins]
+      local term_buf_id = chadterms[direction][1]["buf"]
+      if vim.api.nvim_buf_is_valid(term_buf_id) then
+         vim.cmd("unhide " .. term_buf_id)
+      --    vim.cmd(cmds[direction]["new"])
+      --    local wins = vim.api.nvim_list_wins()
+      --    vim.api.nvim_set_current_win(wins[#wins])
+      --    vim.api.nvim_win_set_buf(0, term_buf)
+      --    chadterms[direction][1]["win"] = wins[#wins]
       else
          new_term()
       end
