@@ -1,15 +1,21 @@
 local M = {}
 
-local get_cmds = function(dims)
+local get_cmds = function(window_opts)
+   local get_dims = function (direction)
+      local direction_switch = direction == "horizontal"
+      local direction_func = direction_switch and vim.api.nvim_win_get_height or vim.api.nvim_win_get_width
+      local assignment = direction_switch and "split_height" or "vsplit_width"
+      return math.floor(direction_func(0)*window_opts[assignment])
+   end
    local cmds = {
      horizontal = {
        existing = "rightbelow vsplit",
-       new = "botright " .. dims["horizontal"] .. "split",
+       new = "botright " .. get_dims("horizontal") .. "split",
        resize = "resize",
      },
      vertical = {
        existing = "rightbelow split",
-       new = "botright " .. dims["vertical"] .. "vsplit",
+       new = "botright " .. get_dims("vertical") .. "vsplit",
        resize = "vertical resize",
      },
    }
@@ -38,9 +44,9 @@ local function spawn(spawn_cmd, type)
    return type == "win" and on_new_win() or type == "buf" and on_new_buf()
 end
 
-function M.new_or_toggle (direction, dims)
+function M.new_or_toggle (direction, window_opts)
    local chadterms = Globals.chadterms
-   local cmds = get_cmds(dims)
+   local cmds = get_cmds(window_opts)
 
    local function new_term()
       local term_win_id=spawn(cmds[direction]["new"], "win")

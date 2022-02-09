@@ -8,19 +8,13 @@ local behavior_handler = function (behavior)
 end
 
 local keymaps_handler = function (keymaps, window_opts)
-   local get_dims = function ()
-      local width_const = math.floor(vim.api.nvim_win_get_width(0)*window_opts["vsplit_width"])
-      local height_const = math.floor(vim.api.nvim_win_get_height(0)*window_opts["split_height"])
-      return {horizontal = height_const, vertical =  width_const}
-   end
-   local dims = get_dims()
    local function set_keymap(direction, hotkey)
       vim.keymap.set("n", hotkey, function()
-         require("chadterm.terminal").new_or_toggle(direction, dims)
+         require("chadterm.terminal").new_or_toggle(direction, window_opts)
       end, {silent=true, noremap=true})
       vim.keymap.set("t", hotkey,
       function()
-         require("chadterm.terminal").new_or_toggle(direction, dims)
+         require("chadterm.terminal").new_or_toggle(direction, window_opts)
       end, {silent=true, noremap=true})
    end
    for direction, hotkey in pairs(keymaps) do
