@@ -41,6 +41,7 @@ function M.new_or_toggle (direction, dims)
       local term_id = chadterms[direction][1]["win"]
       if term_id then
          vim.api.nvim_set_current_win(term_id)
+         vim.cmd('hide')
       end
    end
 
