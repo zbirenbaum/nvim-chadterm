@@ -61,7 +61,7 @@ function M.new_or_toggle (direction, dims)
    local opened = chadterms[direction]
    if not opened or vim.tbl_isempty(opened) then
       new_term()
-   elseif not vim.api.nvim_win_is_valid(chadterms[direction][1]["win"]) then
+   elseif vim.api.nvim_win_is_valid(chadterms[direction][1]["win"]) then
       hide_term()
    elseif vim.api.nvim_buf_is_valid(chadterms[direction][1]["buf"]) then
       show_term()
