@@ -16,6 +16,10 @@ end
 
 local M = {}
 
+local function on_action(chadterms)
+   Globals.chadterms = chadterms
+end
+
 local chadterms = Globals.chadterms
 
 function M.new_or_toggle (direction, dims)
@@ -67,6 +71,7 @@ function M.new_or_toggle (direction, dims)
    else
       hide_term()
    end
+   on_action(chadterms)
 end
 
 return M
