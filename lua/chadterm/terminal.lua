@@ -20,12 +20,12 @@ local function on_action(chadterms)
    Globals.chadterms = chadterms
 end
 
-local chadterms = Globals.chadterms
-
 function M.new_or_toggle (direction, dims)
+   local chadterms = Globals.chadterms
    local cmds = get_cmds(dims)
    local wins = vim.api.nvim_list_wins()
    local bufs = vim.api.nvim_list_bufs()
+
    local function new_term()
       vim.cmd(cmds[direction]["new"])
       local term_win_id = wins[#wins]
