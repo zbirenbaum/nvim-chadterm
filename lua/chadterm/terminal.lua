@@ -34,7 +34,6 @@ function M.new_or_toggle (direction, dims)
       chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
       vim.api.nvim_set_current_win(term_win_id)
       vim.cmd("term")
-      vim.api.nvim_buf_set_option(0, {})
       vim.api.nvim_input('i')
    end
 
