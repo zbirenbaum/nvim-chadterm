@@ -16,7 +16,7 @@ end
 
 local M = {}
 
-local chadterms = Globals.chadterm
+local chadterms = Globals.chadterms
 
 function M.new_or_toggle (direction, dims)
    local function new_term(exists)

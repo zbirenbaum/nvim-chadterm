@@ -9,5 +9,4 @@ M.init_globals = function()
    }
 end
 
-
 return M
