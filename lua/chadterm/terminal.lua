@@ -52,8 +52,11 @@ function M.new_or_toggle (direction, dims)
          print(term_buf_id)
          vim.cmd(cmds[direction]["new"])
          local wins = vim.api.nvim_list_wins()
-         vim.api.nvim_set_current_win(wins[#wins])
+         local term_win_id = wins[#wins]
+         vim.api.nvim_set_current_win(term_win_id)
          vim.api.nvim_win_set_buf(0, term_buf_id)
+         chadterms[direction][1]["wins"] = term_win_id
+         chadterms[direction][1]["buf"] = term_buf_id
       --    chadterms[direction][1]["win"] = wins[#wins]
       else
          new_term()
