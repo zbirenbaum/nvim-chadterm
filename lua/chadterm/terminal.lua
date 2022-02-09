@@ -1,3 +1,5 @@
+local M = {}
+
 local get_cmds = function(dims)
    local cmds = {
      horizontal = {
@@ -13,8 +15,6 @@ local get_cmds = function(dims)
    }
    return cmds
 end
-
-local M = {}
 
 local function on_action(chadterms)
    Globals.chadterms = chadterms
@@ -38,8 +38,6 @@ local function spawn(spawn_cmd, type)
    return type == "win" and on_new_win() or type == "buf" and on_new_buf()
 end
 
-
-
 function M.new_or_toggle (direction, dims)
    local chadterms = Globals.chadterms
    local cmds = get_cmds(dims)
@@ -61,6 +59,7 @@ function M.new_or_toggle (direction, dims)
       local term_buf_id = chadterms[direction][1]["buf"]
       local term_win_id = spawn(cmds[direction]["new"], "win")
       vim.api.nvim_set_current_buf(term_buf_id)
+      vim.api.nvim_input('i') --term enter
       chadterms[direction][1] = { win = term_win_id, buf = term_buf_id }
    end
 
